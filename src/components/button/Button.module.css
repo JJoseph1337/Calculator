@@ -1,0 +1,54 @@
+.button {
+  padding: 8.5px 23px;
+  height: 70px;
+
+  color: #728ab7;
+  font-size: 36px;
+
+  border-radius: 16px;
+  border: none;
+  background: #f0f0f3;
+  box-shadow: 10px 10px 24px 0px rgba(174, 174, 192, 0.2),
+    -10px -10px 24px 0px rgba(255, 255, 255, 0.6);
+
+  transition: 0.1s ease-in-out;
+}
+
+.button:hover {
+  cursor: pointer;
+  transform: scale(0.95);
+}
+
+.button:active {
+  background: #ececf1;
+}
+
+.spanTwo {
+  grid-column: span 2;
+}
+
+.equalButton {
+  color: #f0f0f3;
+  background: #2dd3c5;
+}
+
+.equalButton:active {
+  background: #28bcb0;
+}
+
+.zeroButton {
+  text-align: left;
+}
+
+.grey {
+  color: rgb(137, 137, 137);
+}
+
+.delButton {
+  padding: 8.5px;
+}
+
+.squareButton {
+  padding-top: 3px;
+  padding-left: 26px;
+}

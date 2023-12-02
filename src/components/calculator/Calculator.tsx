@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Calculator.module.css";
 import ResultField from "../result-field/ResultField";
+import ButtonsContainer from "../buttons-container/ButtonsContainer";
 
 const operations = {
 	"+": (a: number, b: number) => a + b,
@@ -15,6 +16,13 @@ const Calculator = () => {
 	const [secondNumber, setSecondNumber] = useState(0);
 	const [operation, setOperation] = useState("");
 	const [result, setResult] = useState(0);
+
+	const handleButtonClick = (value) => () => {
+		setResult((prev) => {
+			if (prev === 0) return (prev += value);
+			return Number(prev.toString() + value);
+		});
+	};
 
 	const handleNumberButtonClick = (value: number) => () => {
 		setResult((prev) => {
@@ -106,7 +114,20 @@ const Calculator = () => {
 	return (
 		<div className={styles.calculator}>
 			<ResultField />
-			calculator
+			<div
+				className={styles.actionsContainer}
+			>
+				<ButtonsContainer
+					onButtonClick={handleButtonClick}
+					onEqualButtonClick={handleEqualButtonClick}
+					operation={operation}
+					onOperationButtonClick={
+						handleOperationButtonClick
+					}
+					onDeleteButtonClick={handleDeleteButtonClick}
+					onResetButtonClick={handleResetButtonClick}
+				/>
+			</div>
 		</div>
 	);
 };

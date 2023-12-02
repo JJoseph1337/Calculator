@@ -1,0 +1,10 @@
+.calculatorGrid {
+	display: grid;
+	gap: 10px;
+	grid-template-columns: repeat(4, 4rem);
+	grid-template-rows: minmax(5rem, auto) repeat(4, 5rem);
+}
+
+.spanTwo {
+	grid-column: span 2;
+}
