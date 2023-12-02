@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Calculator.module.css";
-import ResultField from "./result-field/ResultField";
+import ResultField from "../result-field/ResultField";
 
 const operations = {
 	"+": (a: number, b: number) => a + b,
@@ -103,10 +103,12 @@ const Calculator = () => {
 		});
 	};
 
-	return <div className={styles.calculator}>
-		<ResultField/>
-		calculator
-	</div>;
+	return (
+		<div className={styles.calculator}>
+			<ResultField />
+			calculator
+		</div>
+	);
 };
 
 export default Calculator;
