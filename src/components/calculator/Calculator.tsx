@@ -17,7 +17,7 @@ const Calculator = () => {
 	const [operation, setOperation] = useState("");
 	const [result, setResult] = useState(0);
 
-	const handleButtonClick = (value) => () => {
+	const handleButtonClick = (value: number) => () => {
 		setResult((prev) => {
 			if (prev === 0) return (prev += value);
 			return Number(prev.toString() + value);
@@ -114,9 +114,7 @@ const Calculator = () => {
 	return (
 		<div className={styles.calculator}>
 			<ResultField />
-			<div
-				className={styles.actionsContainer}
-			>
+			<div className={styles.actionsContainer}>
 				<ButtonsContainer
 					onButtonClick={handleButtonClick}
 					onEqualButtonClick={handleEqualButtonClick}
