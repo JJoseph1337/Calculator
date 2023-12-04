@@ -3,26 +3,34 @@ import styles from "./Calculator.module.css";
 import ResultField from "../result-field/ResultField";
 import ButtonsContainer from "../buttons-container/ButtonsContainer";
 
-const operations = {
+type OperationType = "+" | "-" | "*" | "/" | "x2";
+
+type OperationTypeValue =
+	| ((a: number, b: number) => number)
+	| ((a: number) => number);
+
+const operations: Record<
+	OperationType,
+	OperationTypeValue
+> = {
 	"+": (a: number, b: number) => a + b,
 	"-": (a: number, b: number) => a - b,
 	"*": (a: number, b: number) => a * b,
 	"/": (a: number, b: number) => a / b,
-	"22": (a: number) => a * a,
+	x2: (a: number) => a * a,
 };
 
 const Calculator = () => {
 	const [firstNumber, setFirstNumber] = useState(0);
 	const [secondNumber, setSecondNumber] = useState(0);
-	const [operation, setOperation] = useState("");
+	const [operation, setOperation] = useState<
+		OperationType | undefined
+	>();
 	const [result, setResult] = useState(0);
 
-	const handleButtonClick = (value: number) => () => {
-		setResult((prev) => {
-			if (prev === 0) return (prev += value);
-			return Number(prev.toString() + value);
-		});
-	};
+	const preResult = `${firstNumber || ""} ${
+		operation || ""
+	} ${secondNumber || ""} ${secondNumber ? "=" : ""}`;
 
 	const handleNumberButtonClick = (value: number) => () => {
 		setResult((prev) => {
@@ -31,9 +39,17 @@ const Calculator = () => {
 		});
 	};
 
+	const handleRepeatButtonClick = () => {
+		if (operation !== undefined) {
+			setFirstNumber((prev) => {
+				return operations[operation](prev, result);
+			});
+		}
+	};
+
 	const handleOperationButtonClick =
-		(operation: string) => () => {
-			if (operation === "22") {
+		(operation: OperationType) => () => {
+			if (operation === "x2") {
 				setResult((prev) => operations[operation](prev));
 				return;
 			}
@@ -65,7 +81,7 @@ const Calculator = () => {
 		};
 
 	const handleEqualButtonClick =
-		(operation: string) => () => {
+		(operation: OperationType) => () => {
 			if (!result || !operation) return;
 
 			if (secondNumber) {
@@ -90,7 +106,7 @@ const Calculator = () => {
 		setFirstNumber(0);
 		setSecondNumber(0);
 		// FIXME: setOperation par?
-		setOperation("");
+		setOperation(undefined);
 		setResult(0);
 	};
 
@@ -101,22 +117,23 @@ const Calculator = () => {
 			setFirstNumber(0);
 			setSecondNumber(0);
 			// FIXME: wrong parameter?
-			setOperation("");
+			setOperation(undefined);
 			return;
 		}
 
 		setResult((prev) => {
 			if (prev.toString().length === 1) return (prev = 0);
-			return prev.toString().slice(0, -1);
+			// FIXME: обернул в Number
+			return Number(prev.toString().slice(0, -1));
 		});
 	};
 
 	return (
 		<div className={styles.calculator}>
-			<ResultField />
+			<ResultField result={result} preResult={preResult} />
 			<div className={styles.actionsContainer}>
 				<ButtonsContainer
-					onButtonClick={handleButtonClick}
+					onButtonClick={handleNumberButtonClick}
 					onEqualButtonClick={handleEqualButtonClick}
 					operation={operation}
 					onOperationButtonClick={

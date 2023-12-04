@@ -1,5 +1,4 @@
 import styles from "./Button.module.css";
-
 interface ButtonProps {
 	children: React.ReactNode;
 	onClick: () => void;
@@ -7,7 +6,6 @@ interface ButtonProps {
 }
 
 // FIXME: медиа стили перестали работать
-
 const Button = ({
 	children,
 	onClick,
