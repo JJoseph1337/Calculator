@@ -1,26 +1,27 @@
 import styles from "./Button.module.css";
 
-// REFACTOR!!!
-const Button = ({
-  children,
-  onClick,
-  spanTwo,
-  equalButton,
-  zeroButton,
-  grey,
-  delButton,
-  squareButton }) => {
-  return (
-      <button className={`
-      ${spanTwo ? styles.spanTwo : ""}
-      ${styles.button}
-      ${equalButton ? styles.equalButton : ""}
-      ${zeroButton ? styles.zeroButton : ""}
-      ${grey ? styles.grey : ""}
-      ${delButton ? styles.delButton : ""}
-      ${squareButton ? styles.squareButton : ""}
-       `} onClick={onClick}>{children}</button>
-  )
+interface ButtonProps {
+	children: React.ReactNode;
+	onClick: () => void;
+	style?: React.CSSProperties;
 }
 
-export default Button
+// FIXME: медиа стили перестали работать
+
+const Button = ({
+	children,
+	onClick,
+	style,
+}: ButtonProps) => {
+	return (
+		<button
+			style={style}
+			className={styles.button}
+			onClick={onClick}
+		>
+			{children}
+		</button>
+	);
+};
+
+export default Button;

@@ -6,14 +6,3 @@
 	grid-template-columns: repeat(4, 4rem);
 	grid-template-rows: minmax(5rem, auto) repeat(4, 4rem);
 }
-
-@media (width > 1024px) {
-  .calculatorGrid {
-    gap: 15px;
-		padding: 20px 10px;
-  }
-}
-
-.spanTwo {
-	grid-column: span 2;
-}

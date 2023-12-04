@@ -17,21 +17,27 @@ const ButtonsContainer = ({
 	return (
 		<div className={styles.calculatorGrid}>
 			<Button
-				grey
+				style={{
+					color: "grey",
+				}}
 				onClick={onResetButtonClick}
 			>
 				C
 			</Button>
 			<Button
-				grey
-				squareButton
+				style={{
+					color: "grey",
+					paddingLeft: "12px",
+					paddingBottom: "9px",
+				}}
 				onClick={onOperationButtonClick("x2")}
 			>
 				x²
 			</Button>
 			<Button
-				grey
-				delButton
+				style={{
+					color: "grey",
+				}}
 				onClick={onDeleteButtonClick}
 			>
 				del
@@ -57,16 +63,14 @@ const ButtonsContainer = ({
 			<Button onClick={onOperationButtonClick("+")}>
 				<AdditionIcon />
 			</Button>
-			<Button
-				zeroButton
-				spanTwo
-				onClick={onButtonClick(0)}
-			>
-				0
-			</Button>
+			<Button onClick={onButtonClick(0)}>0</Button>
 			<Button onClick={onButtonClick(".")}>.</Button>
 			<Button
-				equalButton
+				style={{
+					color: "#f0f0f3",
+					background: "#2dd3c5",
+					gridColumn: "span 2",
+				}}
 				onClick={onEqualButtonClick(operation)}
 			>
 				<EqualIcon />
