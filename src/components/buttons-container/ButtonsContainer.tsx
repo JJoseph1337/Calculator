@@ -12,7 +12,7 @@ interface ButtonsContainerProps {
 	onEqualButtonClick: (
 		operation: OperationType
 	) => () => void;
-	operation: OperationType;
+	operation: OperationType | undefined;
 	onOperationButtonClick: (
 		operation: OperationType
 	) => () => void;
@@ -85,7 +85,7 @@ const ButtonsContainer = ({
 					background: "#2dd3c5",
 					gridColumn: "span 2",
 				}}
-				onClick={onEqualButtonClick(operation)}
+				onClick={onEqualButtonClick(operation as OperationType)}
 			>
 				<EqualIcon />
 			</Button>

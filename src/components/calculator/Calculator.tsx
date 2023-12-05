@@ -89,7 +89,6 @@ const Calculator = () => {
 			if (!result || !operation) return;
 
 			if (secondNumber) {
-				// TODO: P O N Y A T '
 				setResult((prev) =>
 					operations[operation](prev, secondNumber)
 				);
@@ -146,9 +145,7 @@ const Calculator = () => {
 					onOperationButtonClick={
 						handleOperationButtonClick
 					}
-					onDeleteButtonClick={
-						handleDeleteButtonClick
-					}
+					onDeleteButtonClick={handleDeleteButtonClick}
 					onResetButtonClick={handleResetButtonClick}
 				/>
 			</div>
