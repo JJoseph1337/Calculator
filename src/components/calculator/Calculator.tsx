@@ -248,7 +248,9 @@ const Calculator = () => {
 					onOperationButtonClick={
 						callbacks.onOperationButtonClick
 					}
-					onDeleteButtonClick={callbacks.onDeleteButtonClick}
+					onDeleteButtonClick={
+						callbacks.onDeleteButtonClick
+					}
 					onResetButtonClick={callbacks.onResetButtonClick}
 				/>
 			</div>
