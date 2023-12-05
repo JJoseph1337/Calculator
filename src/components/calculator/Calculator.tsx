@@ -32,6 +32,108 @@ const Calculator = () => {
 		operation || ""
 	} ${secondNumber || ""} ${secondNumber ? "=" : ""}`;
 
+	const callbacks = {
+		onNumberButtonClick: (value: number) => () => {
+			setResult((prev) => {
+				if (prev === 0) return (prev += value);
+				return Number(prev.toString() + value);
+			});
+		},
+
+		onRepeatButtonClick: () => {
+			if (operation !== undefined) {
+				setFirstNumber((prev) => {
+					return operations[operation](prev, result);
+				});
+			}
+		},
+
+		onOperationButtonClick:
+			(operation: OperationType) => () => {
+				if (operation === "x2") {
+					setResult((prev) =>
+						(
+							operations[operation] as (a: number) => number
+						)(prev)
+					);
+					return;
+				}
+
+				if ((firstNumber && secondNumber) || secondNumber) {
+					setFirstNumber(result);
+					setResult(0);
+					setOperation(operation);
+					setSecondNumber(0);
+					return;
+				}
+
+				if (result && firstNumber) {
+					handleRepeatButtonClick();
+					setResult(0);
+					setOperation(operation);
+					setSecondNumber(0);
+					return;
+				}
+
+				if (firstNumber) {
+					setOperation(operation);
+					return;
+				}
+
+				setFirstNumber(result);
+				setResult(0);
+				setOperation(operation);
+			},
+
+		onEqualButtonClick:
+			(operation: OperationType) => () => {
+				if (!result || !operation) return;
+
+				if (secondNumber) {
+					// TODO: P O N Y A T '
+					setResult((prev) =>
+						operations[operation](prev, secondNumber)
+					);
+					setFirstNumber(result);
+					return;
+				}
+
+				setSecondNumber(result);
+				// FIXME: change _result name
+				const _result = operations[operation](
+					firstNumber,
+					result
+				);
+				setResult(_result);
+			},
+
+		onResetButtonClick: () => {
+			setFirstNumber(0);
+			setSecondNumber(0);
+			// FIXME: setOperation par?
+			setOperation(undefined);
+			setResult(0);
+		},
+
+		onDeleteButtonClick: () => {
+			if (!result) return;
+
+			if (firstNumber && secondNumber) {
+				setFirstNumber(0);
+				setSecondNumber(0);
+				// FIXME: wrong parameter?
+				setOperation(undefined);
+				return;
+			}
+
+			setResult((prev) => {
+				if (prev.toString().length === 1) return (prev = 0);
+				// FIXME: обернул в Number
+				return Number(prev.toString().slice(0, -1));
+			});
+		},
+	};
+
 	const handleNumberButtonClick = (value: number) => () => {
 		setResult((prev) => {
 			if (prev === 0) return (prev += value);
@@ -50,7 +152,11 @@ const Calculator = () => {
 	const handleOperationButtonClick =
 		(operation: OperationType) => () => {
 			if (operation === "x2") {
-				setResult((prev) => operations[operation](prev));
+				setResult((prev) =>
+					(operations[operation] as (a: number) => number)(
+						prev
+					)
+				);
 				return;
 			}
 
@@ -130,17 +236,20 @@ const Calculator = () => {
 
 	return (
 		<div className={styles.calculator}>
-			<ResultField result={result} preResult={preResult} />
+			<ResultField
+				result={result}
+				preResult={preResult}
+			/>
 			<div className={styles.actionsContainer}>
 				<ButtonsContainer
-					onButtonClick={handleNumberButtonClick}
-					onEqualButtonClick={handleEqualButtonClick}
+					onButtonClick={callbacks.onNumberButtonClick}
+					onEqualButtonClick={callbacks.onEqualButtonClick}
 					operation={operation}
 					onOperationButtonClick={
-						handleOperationButtonClick
+						callbacks.onOperationButtonClick
 					}
-					onDeleteButtonClick={handleDeleteButtonClick}
-					onResetButtonClick={handleResetButtonClick}
+					onDeleteButtonClick={callbacks.onDeleteButtonClick}
+					onResetButtonClick={callbacks.onResetButtonClick}
 				/>
 			</div>
 		</div>
