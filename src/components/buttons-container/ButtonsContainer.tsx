@@ -5,15 +5,29 @@ import EqualIcon from "../../ui/icons/EqualIcon";
 import MultiplicationIcon from "../../ui/icons/MultiplicationIcon";
 import SubtractionIcon from "../../ui/icons/SubtractionIcon";
 import Button from "../button/Button";
+import { OperationType } from "../calculator/Calculator";
+
+interface ButtonsContainerProps {
+	onNumberButtonClick: (number: number) => () => void;
+	onEqualButtonClick: (
+		operation: OperationType
+	) => () => void;
+	operation: OperationType;
+	onOperationButtonClick: (
+		operation: OperationType
+	) => () => void;
+	onDeleteButtonClick: () => void;
+	onResetButtonClick: () => void;
+}
 
 const ButtonsContainer = ({
-	onButtonClick,
+	onNumberButtonClick,
 	onEqualButtonClick,
 	operation,
 	onOperationButtonClick,
 	onDeleteButtonClick,
 	onResetButtonClick,
-}) => {
+}: ButtonsContainerProps) => {
 	return (
 		<div className={styles.calculatorGrid}>
 			<Button
@@ -45,26 +59,26 @@ const ButtonsContainer = ({
 			<Button onClick={onOperationButtonClick("/")}>
 				<DivisionIcon />
 			</Button>
-			<Button onClick={onButtonClick(7)}>7</Button>
-			<Button onClick={onButtonClick(8)}>8</Button>
-			<Button onClick={onButtonClick(9)}>9</Button>
+			<Button onClick={onNumberButtonClick(7)}>7</Button>
+			<Button onClick={onNumberButtonClick(8)}>8</Button>
+			<Button onClick={onNumberButtonClick(9)}>9</Button>
 			<Button onClick={onOperationButtonClick("*")}>
 				<MultiplicationIcon />
 			</Button>
-			<Button onClick={onButtonClick(4)}>4</Button>
-			<Button onClick={onButtonClick(5)}>5</Button>
-			<Button onClick={onButtonClick(6)}>6</Button>
+			<Button onClick={onNumberButtonClick(4)}>4</Button>
+			<Button onClick={onNumberButtonClick(5)}>5</Button>
+			<Button onClick={onNumberButtonClick(6)}>6</Button>
 			<Button onClick={onOperationButtonClick("-")}>
 				<SubtractionIcon />
 			</Button>
-			<Button onClick={onButtonClick(1)}>1</Button>
-			<Button onClick={onButtonClick(2)}>2</Button>
-			<Button onClick={onButtonClick(3)}>3</Button>
+			<Button onClick={onNumberButtonClick(1)}>1</Button>
+			<Button onClick={onNumberButtonClick(2)}>2</Button>
+			<Button onClick={onNumberButtonClick(3)}>3</Button>
 			<Button onClick={onOperationButtonClick("+")}>
 				<AdditionIcon />
 			</Button>
-			<Button onClick={onButtonClick(0)}>0</Button>
-			<Button onClick={onButtonClick(".")}>.</Button>
+			<Button onClick={onNumberButtonClick(0)}>0</Button>
+			<Button onClick={onNumberButtonClick(".")}>.</Button>
 			<Button
 				style={{
 					color: "#f0f0f3",
