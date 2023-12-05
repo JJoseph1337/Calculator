@@ -27,7 +27,7 @@ const Calculator = () => {
 		OperationType | undefined
 	>();
 	const [result, setResult] = useState(0);
-  console.log("?")
+	console.log("?");
 
 	const preResult = `${firstNumber || ""} ${
 		operation || ""
