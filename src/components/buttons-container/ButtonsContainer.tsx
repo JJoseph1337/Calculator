@@ -78,7 +78,7 @@ const ButtonsContainer = ({
 				<AdditionIcon />
 			</Button>
 			<Button onClick={onNumberButtonClick(0)}>0</Button>
-			<Button onClick={onNumberButtonClick(".")}>.</Button>
+			{/* <Button onClick={onNumberButtonClick(".")}>.</Button> */}
 			<Button
 				style={{
 					color: "#f0f0f3",

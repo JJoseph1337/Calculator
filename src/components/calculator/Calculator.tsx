@@ -3,7 +3,7 @@ import styles from "./Calculator.module.css";
 import ResultField from "../result-field/ResultField";
 import ButtonsContainer from "../buttons-container/ButtonsContainer";
 
-export type OperationType = "+" | "-" | "*" | "/" | "x2";
+export type OperationType = "+" | "-" | "*" | "/" | "x2" ;
 
 type OperationTypeValue =
 	| ((a: number, b: number) => number)

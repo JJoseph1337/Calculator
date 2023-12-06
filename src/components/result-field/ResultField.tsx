@@ -1,6 +1,14 @@
 import styles from "./ResultField.module.css";
 
-const ResultField = ({ result, preResult }) => {
+interface ResultFieldProps {
+	result: number;
+	preResult: string;
+}
+
+const ResultField = ({
+	result,
+	preResult,
+}: ResultFieldProps) => {
 	return (
 		<p className={styles.container}>
 			<span className={styles.preresult}>{preResult}</span>
