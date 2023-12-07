@@ -1,8 +1,8 @@
 .calculatorGrid {
-	display: grid;
-	justify-content: space-around;
-	gap: 5px;
-	padding: 20px 0px;
-	grid-template-columns: repeat(4, 4rem);
-	grid-template-rows: minmax(5rem, auto) repeat(4, 4rem);
+  display: grid;
+  justify-content: space-around;
+  gap: 5px;
+  padding: 20px 0px;
+  grid-template-columns: repeat(4, 4rem);
+  grid-template-rows: minmax(5rem, auto) repeat(4, 4rem);
 }
